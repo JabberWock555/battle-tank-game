@@ -805,3 +805,33 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 13220.258768 seconds.
+  path: Assets/Prefabs/PlayerTank.prefab
+  artifactKey: Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/PlayerTank.prefab using Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '069f85500d034e59a11f6d500cac9da6') in 0.128644 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.406116 seconds.
+  path: Assets/Prefabs/PlayerTank.prefab
+  artifactKey: Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/PlayerTank.prefab using Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0e6a61f319af678df5c07cbe9ec3508') in 0.007084 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.451101 seconds.
+  path: Assets/Prefabs/PlayerTank.prefab
+  artifactKey: Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/PlayerTank.prefab using Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c638fe00f6eeb6057f85cc51681035c2') in 0.007260 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.610237 seconds.
+  path: Assets/Prefabs/PlayerTank.prefab
+  artifactKey: Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/PlayerTank.prefab using Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e37a45df2511f8c83d982427680b1263') in 0.007243 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1495.897331 seconds.
+  path: Assets/Prefabs/PlayerTank.prefab
+  artifactKey: Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/PlayerTank.prefab using Guid(17fd38c86e62b4ac7ab069194e9bb332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45b5d5b09a5d3bbb1d3b37492cbffb23') in 0.042496 seconds 
