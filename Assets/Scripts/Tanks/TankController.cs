@@ -13,11 +13,9 @@ public class TankController
         tankView = GameObject.Instantiate<TankView>(_tankView);
         tankModel = _tankModel;
         body = tankView.GetRigidBody();
-
+        tankView.SetTankType(tankModel.TankType);
         tankView.SetTankController(this);
         tankModel.SetTankController(this);
-        //cam = tankView.GetCamera();
-        
     }
 
     public void CameraSetup(Camera _cam)
@@ -37,12 +35,16 @@ public class TankController
 
     public void Move(float input)
     {
-        body.velocity = tankView.transform.forward * input * tankModel.movementSpeed ;
+        body.velocity = input * tankModel.movementSpeed * tankView.transform.forward ;
     }
 
-    public void Rotate(float input)
+    public void Rotate(float horizontalInput,float verticalInput)
     {
-        Vector3 rotation = new Vector3(0f, input * tankModel.rotationSpeed, 0f);
+        if(verticalInput < 0)
+        {
+            horizontalInput *= -1;
+        }
+        Vector3 rotation = new Vector3(0f, horizontalInput * tankModel.rotationSpeed, 0f);
         Quaternion deltaRotation = Quaternion.Euler(rotation * Time.deltaTime);
         body.MoveRotation(body.rotation * deltaRotation);
     }

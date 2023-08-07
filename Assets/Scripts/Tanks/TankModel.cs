@@ -4,20 +4,30 @@ public class TankModel
 {
     private TankController tankController;
 
+    public PlayerTankType TankType;
+    public int Health;
+    public float Damage;
     public float movementSpeed;
     public float rotationSpeed;
     public Vector3 camOffsetPosition;
     public Vector3 camOffsetRotation;
     public float camSpeed;
 
-    public TankModel(float _movement, float _rotation)
+    //public TankModel(PlayerTankType tankType, float _movement, float _rotation)
+    //{
+    //    movementSpeed = _movement;
+    //    rotationSpeed = _rotation;
+    //    setCameraOffset();
+    //}
+    public TankModel(PlayerTankScriptableObjects playerTank)
     {
-        movementSpeed = _movement;
-        rotationSpeed = _rotation;
+        TankType = playerTank.tankType;
+        movementSpeed = playerTank.TankSpeed;
+        rotationSpeed = playerTank.TankRotationSpeed;
+        Health = playerTank.TankHealth;
+        Damage = playerTank.TankDamage;
         setCameraOffset();
-
     }
-
     public void SetTankController(TankController _tankController)
     {
         tankController = _tankController;

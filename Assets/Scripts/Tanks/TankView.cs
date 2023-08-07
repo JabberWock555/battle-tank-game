@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TankView : MonoBehaviour
@@ -10,18 +8,18 @@ public class TankView : MonoBehaviour
     private float rotation;
 
     [SerializeField] private Rigidbody body;
+    [SerializeField] private PlayerTankType tankType;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         cam = Camera.main;
+        
+    }
+    void Start()
+    {
         tankController.CameraSetup(cam);
-        //cam.transform.SetParent(transform);
-        //cam.transform.position = new Vector3(-10f, 21f, -10f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         InputControls();
@@ -32,7 +30,7 @@ public class TankView : MonoBehaviour
         }
         if(rotation != 0)
         {
-            tankController.Rotate(rotation);
+            tankController.Rotate(rotation, movement);
         }   
     }
 
@@ -51,6 +49,11 @@ public class TankView : MonoBehaviour
     public void SetTankController(TankController _tankController)
     {
         tankController = _tankController;
+    }
+
+    public void SetTankType(PlayerTankType tankType)
+    {
+        this.tankType = tankType;
     }
 
     public Rigidbody GetRigidBody()

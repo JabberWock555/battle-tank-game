@@ -384,11 +384,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1882422112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2068d3eb4e3741ebb4b44e5ae3bfc9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 11dbf05beb1d64f69be35d3c678a7b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankView: {fileID: 6505336621555381688, guid: 17fd38c86e62b4ac7ab069194e9bb332,
-    type: 3}
+  PlayerConfig:
+  - {fileID: 11400000, guid: 6b093622635f8414ea08aa458f815cd8, type: 2}
+  - {fileID: 11400000, guid: a407cc810a4db47f38cd3f0689d18b69, type: 2}
+  - {fileID: 11400000, guid: ce6799efa8d624b05bd96441ded5f86e, type: 2}
+  - {fileID: 11400000, guid: b16eae04821174c9b9c2bbff9167f79b, type: 2}
 --- !u!4 &1882422114
 Transform:
   m_ObjectHideFlags: 0
