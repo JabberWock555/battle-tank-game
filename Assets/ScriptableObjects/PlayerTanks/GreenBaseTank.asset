@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3793410e7b5af4ce7a197604628b54f2, type: 3}
+  m_Name: GreenBaseTank
+  m_EditorClassIdentifier: 
+  tankType: 2
+  tankView: {fileID: 138440389896793076, guid: 24abb8bc2bc844d1f808f752a77e32ef, type: 3}
+  TankName: GreenBaseTank
+  TankSpeed: 30
+  TankRotationSpeed: 200
+  TankHealth: 100
+  TankDamage: 10
+  shootForce: 20
