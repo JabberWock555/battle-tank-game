@@ -1,10 +1,13 @@
 ﻿using System;
 public class BulletModel
 {
+    public int Damage;
     private BulletController bulletController;
 
-    public BulletModel()
+    public BulletModel(BulletScriptableObject bulletObject)
     {
+        Damage = bulletObject.Damage;
+
     }
 
     public void SetBulletController(BulletController bulletController)

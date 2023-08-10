@@ -12,6 +12,20 @@ public class EnemyController
         enemyView = GameObject.Instantiate<EnemyView>(enemy.enemyView, position, Quaternion.identity);
 
         enemyModel = new EnemyModel(enemy);
+        enemyView.setEnemyController(this);
+    }
+
+    public void TakeDamage(int Damage)
+    {
+        if(enemyModel.GetHealth() > 0)
+        {
+            enemyModel.SetHealth(-Damage);
+        }
+        else
+        {
+            enemyView.Destroyed();
+            //EnemySpawner.Instance.DestroyEffect(enemyView.transform);
+        }
     }
 }
  

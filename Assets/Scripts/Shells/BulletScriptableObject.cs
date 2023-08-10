@@ -6,5 +6,5 @@ public class BulletScriptableObject : ScriptableObject
 {
     public BulletType bulletType;
     public BulletView bulletView;
-
+    public int Damage;
 }

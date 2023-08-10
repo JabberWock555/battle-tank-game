@@ -51,6 +51,6 @@ public class TankController
 
     public void Shoot(Transform firePoint)
     {
-        BulletService.Instance.ShootBullet(BulletType.PlayerBullet, firePoint, tankModel.shootForce);
+        BulletService.Instance.ShootBullet(firePoint, tankModel.shootForce);
     }
 }

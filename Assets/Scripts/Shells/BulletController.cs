@@ -7,26 +7,30 @@ public class BulletController
     private BulletModel bulletModel;
     private Rigidbody BulletBody;
 
-    public BulletController(BulletModel _bulletModel)
+    public BulletController(BulletScriptableObject bulletObject)
     {
-        bulletModel = _bulletModel;
-
+        bulletModel = new BulletModel(bulletObject);
         bulletModel.SetBulletController(this);
+        bulletView = bulletObject.bulletView;
     }
 
-    private void spwanBullet(BulletView bulletView, Transform firePoint)
+    private BulletView spwanBullet()
     {
-        this.bulletView = GameObject.Instantiate<BulletView>(bulletView, firePoint.position, firePoint.rotation);
-        bulletView.SetBulletController(this);
+        BulletView Newbullet = GameObject.Instantiate<BulletView>(bulletView);
+        Newbullet.SetBulletController(this);
+        return Newbullet;
     }
 
-
-
-    public void Shoot(BulletView _bulletView, Transform firePoint, float shootForce)
+    public int getDamage()
     {
-        spwanBullet(_bulletView, firePoint);
-        BulletBody = bulletView.GetRigidbody();
+        return bulletModel.Damage;
+    }
+
+    public void Shoot(Transform firePoint, float shootForce)
+    {
+        BulletView NewBullet = spwanBullet();
+        NewBullet.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
+        BulletBody = NewBullet.GetRigidbody();
         BulletBody.AddForce(firePoint.forward * shootForce, ForceMode.Impulse);
-
     }
 }

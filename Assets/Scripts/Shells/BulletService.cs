@@ -17,21 +17,24 @@ public class BulletService : MonoBehaviour
 
     private BulletController bulletController;
     [SerializeField] private BulletScriptableObject[] bulletTypes;
+    [SerializeField] private ParticleSystem bulletVFX;
 
-    private void Start()
+    public void CreateBulletController(BulletType BulletType)
     {
-        CreateBulletController();
+        BulletScriptableObject bulletObject = bulletTypes[(int)BulletType];
+        bulletController = new BulletController(bulletObject);
     }
 
-    private void CreateBulletController()
+    public void ShootBullet(Transform firePoint, float shootForce)
     {
-        BulletModel bulletModel = new BulletModel();
-        bulletController = new BulletController(bulletModel);
+        bulletController.Shoot(firePoint, shootForce);
     }
 
-    public void ShootBullet(BulletType playerBullet, Transform firePoint, float shootForce)
+    public int GetDamage(BulletView bullet)
     {
-        BulletView bulletView = bulletTypes[(int)playerBullet].bulletView;
-        bulletController.Shoot(bulletView, firePoint, shootForce);
+        return bullet.getDamage();
     }
+
+    public ParticleSystem GetBulletExplosion() { return bulletVFX; }
+
 }
