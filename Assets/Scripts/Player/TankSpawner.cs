@@ -22,14 +22,18 @@ public class TankSpawner : MonoBehaviour
     void Start()
     {
         CreatePlayerTank();
-        BulletService.Instance.CreateBulletController(BulletType.PlayerBullet);
+        
     }
 
+    private BulletController GetBulletController(BulletType BulletType)
+    {
+        return BulletService.Instance.CreateBulletController(BulletType);
+    }
 
     private void CreatePlayerTank()
     {
         PlayerTankScriptableObjects playerTank = PlayerConfig[Random.Range(0, PlayerConfig.Length)];
         TankModel tankModel = new TankModel(playerTank);
-        TankController tankController = new TankController(playerTank.tankView, tankModel);
+        TankController tankController = new TankController(playerTank.tankView, tankModel, GetBulletController(BulletType.PlayerBullet));
     }
 }

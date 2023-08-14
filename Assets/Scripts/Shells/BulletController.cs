@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BulletController
+public class BulletController : StateMachineBehaviour
 {
     private BulletView bulletView;
     private BulletModel bulletModel;
@@ -21,7 +21,7 @@ public class BulletController
         return Newbullet;
     }
 
-    public int getDamage()
+    public int GetDamage()
     {
         return bulletModel.Damage;
     }

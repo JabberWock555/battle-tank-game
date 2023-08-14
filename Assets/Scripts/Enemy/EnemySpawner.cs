@@ -20,19 +20,14 @@ public class EnemySpawner: MonoBehaviour
     }
 
     [SerializeField] private EnemyScriptableOblects[] EnemyTypeList;
+    [SerializeField] private Transform[] SpawnPoints;
+    [SerializeField] private float SpawnDistance;
     [SerializeField] private int enemyCount = 3;
     [SerializeField] private ParticleSystem Explosion;
 
-    // Use this for initialization
     void Start()
     {
         SpawnEnemy();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void SpawnEnemy()
@@ -40,17 +35,11 @@ public class EnemySpawner: MonoBehaviour
         for(int i = 0; i < enemyCount; i++)
         {
             EnemyScriptableOblects enemy = EnemyTypeList[Random.Range(0, EnemyTypeList.Length)];
-            EnemyController enemyController = new EnemyController(enemy, 35f, 35f);
+            EnemyController enemyController = new EnemyController(enemy, SpawnPoints[ Random.Range(0, SpawnPoints.Length)]);
         }
     }
 
     public ParticleSystem getExplosion() { return Explosion; }
 
-    //public void DestroyEffect(Transform location)
-    //{
-    //    Destroy(location.gameObject);
-    //    ParticleSystem explosion = Instantiate<ParticleSystem>(Explosion, location.position, Quaternion.identity);
-    //    explosion.Play();
-    //    Destroy(explosion.gameObject, 0.5f);
-    //}
+    
 }

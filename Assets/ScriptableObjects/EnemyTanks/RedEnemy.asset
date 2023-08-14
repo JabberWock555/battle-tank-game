@@ -16,6 +16,6 @@ MonoBehaviour:
   enemyView: {fileID: 1407378398985976784, guid: ee1f5963f5d244d5ea4b66466551ea5b,
     type: 3}
   enemySpeed: 0
-  enemyRange: 0
-  enemyHealth: 0
+  enemyRange: 10
+  enemyHealth: 50
   enemyShootForce: 0

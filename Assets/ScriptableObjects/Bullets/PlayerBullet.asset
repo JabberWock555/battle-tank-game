@@ -15,3 +15,4 @@ MonoBehaviour:
   bulletType: 1
   bulletView: {fileID: 8578954574993954591, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
     type: 3}
+  Damage: 10

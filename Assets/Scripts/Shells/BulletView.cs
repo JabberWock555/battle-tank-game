@@ -16,13 +16,15 @@ public class BulletView: MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+        if(damagable != null)
+        {
+            damagable.TakeDamage(bulletController.GetDamage());
+        }
         Destroy(gameObject);
     }
 
-    public int getDamage()
-    {
-        return bulletController.getDamage();
-    }
+
     public Rigidbody GetRigidbody()
     {
         return body;

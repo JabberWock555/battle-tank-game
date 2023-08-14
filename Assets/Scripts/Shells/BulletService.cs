@@ -15,25 +15,25 @@ public class BulletService : MonoBehaviour
             Destroy(this);
     }
 
-    private BulletController bulletController;
     [SerializeField] private BulletScriptableObject[] bulletTypes;
     [SerializeField] private ParticleSystem bulletVFX;
 
-    public void CreateBulletController(BulletType BulletType)
+    public BulletController CreateBulletController(BulletType BulletType)
     {
         BulletScriptableObject bulletObject = bulletTypes[(int)BulletType];
-        bulletController = new BulletController(bulletObject);
+        BulletController bulletController = new(bulletObject);
+        return bulletController;
     }
 
-    public void ShootBullet(Transform firePoint, float shootForce)
-    {
-        bulletController.Shoot(firePoint, shootForce);
-    }
+    //public void ShootBullet(Transform firePoint, float shootForce)
+    //{
+    //    bulletController.Shoot(firePoint, shootForce);
+    //}
 
-    public int GetDamage(BulletView bullet)
-    {
-        return bullet.getDamage();
-    }
+    //public int GetDamage(BulletView bullet)
+    //{
+    //    return bullet.getDamage();
+    //}
 
     public ParticleSystem GetBulletExplosion() { return bulletVFX; }
 

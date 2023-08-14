@@ -7,8 +7,9 @@ public class TankController
     private Camera cam;
     private Rigidbody body;
     private Transform camTarget;
+    private BulletController bulletController;
 
-    public TankController(TankView _tankView, TankModel _tankModel)
+    public TankController(TankView _tankView, TankModel _tankModel, BulletController bulletController)
     {
         tankView = GameObject.Instantiate<TankView>(_tankView);
         tankModel = _tankModel;
@@ -16,6 +17,7 @@ public class TankController
         tankView.SetTankType(tankModel.TankType);
         tankView.SetTankController(this);
         tankModel.SetTankController(this);
+        this.bulletController = bulletController;
     }
 
     public void CameraSetup(Camera _cam)
@@ -51,6 +53,7 @@ public class TankController
 
     public void Shoot(Transform firePoint)
     {
-        BulletService.Instance.ShootBullet(firePoint, tankModel.shootForce);
+        bulletController.Shoot(firePoint, tankModel.shootForce);
     }
 }
+   
