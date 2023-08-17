@@ -15,7 +15,7 @@ MonoBehaviour:
   tankType: 2
   tankView: {fileID: 138440389896793076, guid: 24abb8bc2bc844d1f808f752a77e32ef, type: 3}
   TankName: GreenBaseTank
-  TankSpeed: 30
+  TankSpeed: 22
   TankRotationSpeed: 200
   TankHealth: 100
   TankDamage: 10

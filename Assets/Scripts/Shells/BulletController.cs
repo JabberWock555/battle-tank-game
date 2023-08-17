@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BulletController : StateMachineBehaviour
+public class BulletController
 {
     private BulletView bulletView;
     private BulletModel bulletModel;
@@ -12,6 +12,7 @@ public class BulletController : StateMachineBehaviour
         bulletModel = new BulletModel(bulletObject);
         bulletModel.SetBulletController(this);
         bulletView = bulletObject.bulletView;
+        bulletView.SetBulletController(this);
     }
 
     private BulletView spwanBullet()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6205555544270382463}
   - component: {fileID: 3256988102806801739}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8202093564603150566}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9199251949371613749}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 4560816025436251661}
   - component: {fileID: 8204494130192105783}
   - component: {fileID: 5367984676252600275}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 5287162698799715241}
   - component: {fileID: 8125626523480824767}
   - component: {fileID: 4200187251588298422}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 8568159208447928128}
   - component: {fileID: 8568159208450795282}
   - component: {fileID: 8568159208449697234}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 8568159208447928130}
   - component: {fileID: 8568159208450795292}
   - component: {fileID: 8568159208449697244}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 135986850176754678}
   - component: {fileID: 6651219221901732495}
   - component: {fileID: 2140182749071918028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,6 +586,7 @@ MonoBehaviour:
   body: {fileID: 135986850176754678}
   tankType: 0
   firePoint: {fileID: 9199251949371613749}
+  HealthBar: {fileID: 3256988102806801739}
 --- !u!1 &8568159208447441574
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +598,7 @@ GameObject:
   - component: {fileID: 8568159208447928134}
   - component: {fileID: 8568159208450795284}
   - component: {fileID: 8568159208449697236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8568159208447928136}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +718,7 @@ GameObject:
   - component: {fileID: 8568159208447928140}
   - component: {fileID: 8568159208450795286}
   - component: {fileID: 8568159208449697238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +802,7 @@ GameObject:
   - component: {fileID: 6638139802168141159}
   - component: {fileID: 7028842161324924736}
   - component: {fileID: 4030841526474162311}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,6 +878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DustTrailRight
       objectReference: {fileID: 0}
+    - target: {fileID: 148586, guid: f7167ad2844254441b40b8a300b4f1fe, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 496482, guid: f7167ad2844254441b40b8a300b4f1fe, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -943,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 148586, guid: f7167ad2844254441b40b8a300b4f1fe, type: 3}
       propertyPath: m_Name
       value: DustTrailLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 148586, guid: f7167ad2844254441b40b8a300b4f1fe, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 496482, guid: f7167ad2844254441b40b8a300b4f1fe, type: 3}
       propertyPath: m_RootOrder

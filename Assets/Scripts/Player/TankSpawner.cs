@@ -1,39 +1,54 @@
 using UnityEngine;
 
-public class TankSpawner : MonoBehaviour
+namespace BattleTank.Player
 {
-    private static TankSpawner instance;
-    public static TankSpawner Instance { get { return instance; } }
 
-    private void Awake()
+    public class TankSpawner : MonoBehaviour
     {
-        if(instance == null)
+        #region Singleton
+        private static TankSpawner instance;
+        public static TankSpawner Instance { get { return instance; } }
+
+        private void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
-        else
+
+        #endregion
+
+        public PlayerTankScriptableObjects[] PlayerConfig;
+        [SerializeField] private ParticleSystem Explosion;
+        private TankController spawnedTank;
+
+        void Start()
         {
-            Destroy(this);
+            CreatePlayerTank();
+
         }
-    }
 
-    public PlayerTankScriptableObjects[] PlayerConfig;
+        private void CreatePlayerTank()
+        {
+            PlayerTankScriptableObjects playerTank = PlayerConfig[Random.Range(0, PlayerConfig.Length)];
+            TankModel tankModel = new TankModel(playerTank);
+            TankController tankController = new TankController(playerTank.tankView, tankModel, GetBulletController(BulletType.PlayerBullet));
+            spawnedTank = tankController;
+        }
 
-    void Start()
-    {
-        CreatePlayerTank();
-        
-    }
 
-    private BulletController GetBulletController(BulletType BulletType)
-    {
-        return BulletService.Instance.CreateBulletController(BulletType);
-    }
+        internal ParticleSystem getExplosion() { return Explosion; }
 
-    private void CreatePlayerTank()
-    {
-        PlayerTankScriptableObjects playerTank = PlayerConfig[Random.Range(0, PlayerConfig.Length)];
-        TankModel tankModel = new TankModel(playerTank);
-        TankController tankController = new TankController(playerTank.tankView, tankModel, GetBulletController(BulletType.PlayerBullet));
+        private BulletController GetBulletController(BulletType BulletType)
+        {
+            return BulletService.Instance.CreateBulletController(BulletType);
+        }
+
+        public TankController GetSpawnedTank() { return spawnedTank; }
     }
 }

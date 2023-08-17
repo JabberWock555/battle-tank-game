@@ -1,7 +1,7 @@
 ﻿using System;
 public enum BulletType
 {
-    None,
-    PlayerBullet,
-    EnemyBullet
+    None = -1,
+    PlayerBullet = 0,
+    EnemyBullet = 1
 }

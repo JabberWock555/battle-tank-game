@@ -16,7 +16,7 @@ MonoBehaviour:
   tankView: {fileID: 5214146606993243401, guid: 1945ecdb2a68f4b22bfd7003ed53fb7b,
     type: 3}
   TankName: Blue Fast Tank
-  TankSpeed: 40
+  TankSpeed: 25
   TankRotationSpeed: 200
   TankHealth: 90
   TankDamage: 10

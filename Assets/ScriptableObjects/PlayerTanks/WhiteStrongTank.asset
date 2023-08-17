@@ -16,7 +16,7 @@ MonoBehaviour:
   tankView: {fileID: 8516321559548683878, guid: 553468cd5e00c479e87532ede631f91d,
     type: 3}
   TankName: WhiteStrongTank
-  TankSpeed: 30
+  TankSpeed: 22
   TankRotationSpeed: 200
   TankHealth: 150
   TankDamage: 10

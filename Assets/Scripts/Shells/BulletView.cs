@@ -21,6 +21,7 @@ public class BulletView: MonoBehaviour
         {
             damagable.TakeDamage(bulletController.GetDamage());
         }
+
         Destroy(gameObject);
     }
 
@@ -32,8 +33,7 @@ public class BulletView: MonoBehaviour
 
     private void OnDestroy()
     {
-        ParticleSystem explosion = Instantiate(BulletService.Instance.GetBulletExplosion(), transform.position, Quaternion.identity);
-        explosion.Play();
-        Destroy(explosion.gameObject, 0.75f);
+        BulletService.Instance.BulletDestroyVfx(transform);
     }
+
 }

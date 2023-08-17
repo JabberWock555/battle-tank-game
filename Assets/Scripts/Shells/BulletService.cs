@@ -21,20 +21,16 @@ public class BulletService : MonoBehaviour
     public BulletController CreateBulletController(BulletType BulletType)
     {
         BulletScriptableObject bulletObject = bulletTypes[(int)BulletType];
-        BulletController bulletController = new(bulletObject);
+        BulletController bulletController = new BulletController(bulletObject);
         return bulletController;
     }
 
-    //public void ShootBullet(Transform firePoint, float shootForce)
-    //{
-    //    bulletController.Shoot(firePoint, shootForce);
-    //}
+    public void BulletDestroyVfx(Transform BulletPos)
+    {
+        ParticleSystem explosion = Instantiate( bulletVFX , BulletPos.transform.position, Quaternion.identity);
+        explosion.Play();
+        Destroy(explosion.gameObject, 0.75f);
+    }
 
-    //public int GetDamage(BulletView bullet)
-    //{
-    //    return bullet.getDamage();
-    //}
-
-    public ParticleSystem GetBulletExplosion() { return bulletVFX; }
 
 }

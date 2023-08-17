@@ -16,7 +16,7 @@ MonoBehaviour:
   tankView: {fileID: 3991410282769504905, guid: e90aacde40b29494583b5bcaadd475d7,
     type: 3}
   TankName: YellowSlowTank
-  TankSpeed: 20
+  TankSpeed: 18
   TankRotationSpeed: 150
   TankHealth: 100
   TankDamage: 10

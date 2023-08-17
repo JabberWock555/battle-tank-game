@@ -1,52 +1,99 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace BattleTank.Enemy
 {
     public class EnemyView : MonoBehaviour, IDamagable
     {
         [SerializeField] private Transform firePoint;
+        [SerializeField] private Slider HealthBar;
         private EnemyController enemyController;
-        private Animator animator;
+        private NavMeshAgent agent;
+        private Rigidbody body;
 
-        public void setEnemyController(EnemyController enemyController)
+        private EnemyState currentState;
+
+        public ChaseEnenmy chaseState;
+        public IdleEnemy idleState;
+        public AttackEnemy attackState;
+        public PatrolEnemy patrolState;
+
+        private void Awake()
         {
-            this.enemyController = enemyController;
+            agent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
+            body = GetComponent<Rigidbody>();
+            ChangeState(idleState);
+            // animator = GetComponent<Animator>();
+        }
+
+        private void Update()
+        {
+            currentState.Tick();
+        }
+
+        public void SetEnemyController(EnemyController enemyController)
+        {
+            this.enemyController = enemyController;
         }
 
         public void DestroyEffect()
         {
             ParticleSystem explosion = Instantiate<ParticleSystem>(EnemySpawner.Instance.getExplosion(), transform.position, Quaternion.identity);
             explosion.Play();
+
             Destroy(gameObject);
             Destroy(explosion.gameObject, 0.75f);
         }
 
         public void TakeDamage(int damage)
         {
-            enemyController.TakeDamage(damage);
+            HealthBar.value = enemyController.TakeDamage(damage);
         }
 
-        public void ChaseBehaviour(Transform player, Animator animator)
+        //private void OnDrawGizmosSelected()
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, enemyController.GetRange());
+        //}
+
+        #region Getters
+
+        internal float GetEnemyRange() { return enemyController.GetRange(); }
+
+        internal Rigidbody GetRigidBody() { return body; }
+
+        internal float GetAttackRange() { return enemyController.GetAttackRange(); }
+
+        internal NavMeshAgent GetAgent() { return agent; }
+
+        internal BulletController GetBulletController() { return enemyController.GetBulletController(); }
+
+        internal Transform GetFirePoint() { return firePoint; }
+
+        internal float GetShootForce() { return enemyController.GetShootForce(); }
+
+        internal Transform[] GetPatrolPoints() { return enemyController.GetPatrolPoints(); }
+
+        internal float GetBPM() { return enemyController.GetBPM(); }
+
+        #endregion
+
+        internal void ChangeState(EnemyState newState)
         {
-            enemyController.Chase(player, animator);
+            if(currentState != null)
+            {
+                currentState.OnStateExit();
+            }
+
+            currentState = newState;
+            currentState.OnStateEnter();
         }
 
-        internal void PatrolBehaviour(Transform player, Animator animator)
-        {
-            enemyController.Patrol(player, animator);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, enemyController.GetRange());
-        }
     }
 }

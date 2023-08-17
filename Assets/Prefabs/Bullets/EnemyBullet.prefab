@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1868651210427147187, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714606450980578163, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7083406971797258866, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
         type: 3}
       propertyPath: m_RootOrder
@@ -67,6 +77,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 7083406971797757522, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7083406971799683218, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -75,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 8578954574993954591, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
         type: 3}
       propertyPath: bulletType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd5eafde4656d4da8a7af8f0e3a45ff7, type: 3}

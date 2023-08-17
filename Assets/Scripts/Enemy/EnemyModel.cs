@@ -5,16 +5,24 @@ namespace BattleTank.Enemy
 {
     public class EnemyModel
     {
-        public float enemySpeed;
-        public float enemyRange;
+
         private float enemyHealth;
-        public float enemyShootForce;
+        public float enemyRange { get; private set; }
+        public float enemySpeed { get; private set; }
+        public float enemyShootForce { get; private set; }
+        public float enemyAttackRange { get; private set; }
+        public float enemyPatrolRange { get; private set; }
+        public float enemyBPM { get; private set; }
 
         public EnemyModel(EnemyScriptableOblects enemy)
         {
             enemySpeed = enemy.enemySpeed;
             enemyHealth = enemy.enemyHealth;
             enemyShootForce = enemy.enemyShootForce;
+            enemyRange = enemy.enemyRange ;
+            enemyAttackRange = enemy.enemyAttackRange;
+            enemyPatrolRange = enemy.enemyPatrolRange;
+            enemyBPM = enemy.enemyBPM;
         }
 
         public void SetHealth(int value)
