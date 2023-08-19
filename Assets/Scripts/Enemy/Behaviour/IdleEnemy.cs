@@ -16,10 +16,6 @@ namespace BattleTank.Enemy
 
             rb = enemy.GetRigidBody();
             timeElapsed = 0f;
-
-
-            Debug.Log("Idle");
-
         }
 
         public override void OnStateExit()

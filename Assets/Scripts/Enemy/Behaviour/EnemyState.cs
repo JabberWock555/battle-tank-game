@@ -26,6 +26,7 @@ namespace BattleTank.Enemy
         public virtual void OnStateExit()
         {
             this.enabled = false;
+            playerTransform = null;
         }
 
         public virtual void Tick(){}

@@ -2,38 +2,41 @@
 using System.Collections;
 using System;
 
-public class BulletView: MonoBehaviour
+namespace BattleTank.Bullet
 {
-    private BulletController bulletController;
-
-    [SerializeField] private BulletType bulletType;
-    [SerializeField] private Rigidbody body;
-
-    public void SetBulletController(BulletController bulletController)
+    public class BulletView : MonoBehaviour
     {
-        this.bulletController = bulletController;
-    }
+        private BulletController bulletController;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
-        if(damagable != null)
+        [SerializeField] private BulletType bulletType;
+        [SerializeField] private Rigidbody body;
+
+        public void SetBulletController(BulletController bulletController)
         {
-            damagable.TakeDamage(bulletController.GetDamage());
+            this.bulletController = bulletController;
         }
 
-        Destroy(gameObject);
+        private void OnCollisionEnter(Collision collision)
+        {
+            IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(bulletController.GetDamage());
+            }
+
+            Destroy(gameObject);
+        }
+
+
+        public Rigidbody GetRigidbody()
+        {
+            return body;
+        }
+
+        private void OnDestroy()
+        {
+            BulletService.Instance.BulletDestroyVfx(transform);
+        }
+
     }
-
-
-    public Rigidbody GetRigidbody()
-    {
-        return body;
-    }
-
-    private void OnDestroy()
-    {
-        BulletService.Instance.BulletDestroyVfx(transform);
-    }
-
 }

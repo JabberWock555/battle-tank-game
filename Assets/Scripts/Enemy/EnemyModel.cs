@@ -11,7 +11,6 @@ namespace BattleTank.Enemy
         public float enemySpeed { get; private set; }
         public float enemyShootForce { get; private set; }
         public float enemyAttackRange { get; private set; }
-        public float enemyPatrolRange { get; private set; }
         public float enemyBPM { get; private set; }
 
         public EnemyModel(EnemyScriptableOblects enemy)
@@ -21,7 +20,6 @@ namespace BattleTank.Enemy
             enemyShootForce = enemy.enemyShootForce;
             enemyRange = enemy.enemyRange ;
             enemyAttackRange = enemy.enemyAttackRange;
-            enemyPatrolRange = enemy.enemyPatrolRange;
             enemyBPM = enemy.enemyBPM;
         }
 

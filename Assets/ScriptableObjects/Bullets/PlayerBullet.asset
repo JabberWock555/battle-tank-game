@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9c24d46939428c91a933da5941dde, type: 3}
   m_Name: PlayerBullet
   m_EditorClassIdentifier: 
-  bulletType: 1
+  bulletType: 0
   bulletView: {fileID: 8578954574993954591, guid: bd5eafde4656d4da8a7af8f0e3a45ff7,
     type: 3}
   Damage: 10

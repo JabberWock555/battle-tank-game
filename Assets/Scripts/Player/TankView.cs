@@ -21,6 +21,7 @@ namespace BattleTank.Player
             cam = Camera.main;
 
         }
+
         void Start()
         {
             tankController.CameraSetup(cam);
@@ -54,7 +55,6 @@ namespace BattleTank.Player
             movement = Input.GetAxis("Vertical1");
             rotation = Input.GetAxis("Horizontal1");
         }
-
 
         public void SetTankController(TankController _tankController)
         {

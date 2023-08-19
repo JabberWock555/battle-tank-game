@@ -1,3 +1,4 @@
+using BattleTank.Bullet;
 using UnityEngine;
 
 namespace BattleTank.Player
@@ -10,11 +11,12 @@ namespace BattleTank.Player
         private Rigidbody body;
         private Transform camTarget;
         private BulletController bulletController;
+        private int BulletCount = 0;
 
-        public TankController(TankView _tankView, TankModel _tankModel, BulletController bulletController)
+        public TankController(PlayerTankScriptableObjects playerTank, BulletController bulletController)
         {
-            tankView = GameObject.Instantiate<TankView>(_tankView);
-            tankModel = _tankModel;
+            tankView = GameObject.Instantiate<TankView>(playerTank.tankView);
+            tankModel = new TankModel(playerTank);
             body = tankView.GetRigidBody();
             tankView.SetTankType(tankModel.TankType);
             tankView.SetTankController(this);
@@ -58,6 +60,7 @@ namespace BattleTank.Player
         public void Shoot(Transform firePoint)
         {
             bulletController.Shoot(firePoint, tankModel.shootForce);
+            EventSystem.EventService.Instance.InvokePlayerShoot(++BulletCount);
         }
 
         public int TakeDamage(int Damage)

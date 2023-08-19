@@ -1,28 +1,11 @@
+using BattleTank.Bullet;
 using UnityEngine;
 
 namespace BattleTank.Player
 {
 
-    public class TankSpawner : MonoBehaviour
+    public class TankSpawner : Singleton<TankSpawner>
     {
-        #region Singleton
-        private static TankSpawner instance;
-        public static TankSpawner Instance { get { return instance; } }
-
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
-
-        #endregion
-
         public PlayerTankScriptableObjects[] PlayerConfig;
         [SerializeField] private ParticleSystem Explosion;
         private TankController spawnedTank;
@@ -36,8 +19,7 @@ namespace BattleTank.Player
         private void CreatePlayerTank()
         {
             PlayerTankScriptableObjects playerTank = PlayerConfig[Random.Range(0, PlayerConfig.Length)];
-            TankModel tankModel = new TankModel(playerTank);
-            TankController tankController = new TankController(playerTank.tankView, tankModel, GetBulletController(BulletType.PlayerBullet));
+            TankController tankController = new TankController(playerTank , GetBulletController(BulletType.PlayerBullet));
             spawnedTank = tankController;
         }
 

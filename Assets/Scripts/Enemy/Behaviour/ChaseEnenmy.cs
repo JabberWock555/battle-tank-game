@@ -14,9 +14,6 @@ namespace BattleTank.Enemy
             base.OnStateEnter();
 
             rb = enemy.GetRigidBody();
-
-            Debug.Log("Chase");
-
         }
 
         public override void OnStateExit()
@@ -45,7 +42,6 @@ namespace BattleTank.Enemy
             {
                 agent.SetDestination(playerTransform.position * offset);
                 rb.transform.LookAt(playerTransform);
-                Debug.Log("Chaseing: " + playerTransform );
             }
             else if(distance < enemy.GetAttackRange())
             {

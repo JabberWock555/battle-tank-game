@@ -10,7 +10,6 @@ namespace BattleTank.Enemy
         public EnemyView enemyView;
         public float enemySpeed;
         public float enemyRange;
-        public float enemyPatrolRange;
         public float enemyAttackRange;
         public float enemyHealth;
         public float enemyShootForce;

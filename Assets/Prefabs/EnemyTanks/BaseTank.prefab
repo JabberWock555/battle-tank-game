@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707db05b25c184510bc0b4b975cfb7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
+  offset: 5
 --- !u!114 &240384095114042765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aafac74921554e81925373d0c6bb821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 1
 --- !u!195 &7496929510722363943
 NavMeshAgent:
   m_ObjectHideFlags: 0

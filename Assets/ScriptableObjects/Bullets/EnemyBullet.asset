@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9c24d46939428c91a933da5941dde, type: 3}
   m_Name: EnemyBullet
   m_EditorClassIdentifier: 
-  bulletType: 2
+  bulletType: 1
   bulletView: {fileID: 6787849610248130690, guid: f99d13d3331ab44d5b276e9f0e6bded7,
     type: 3}
+  Damage: 10

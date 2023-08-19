@@ -7,15 +7,13 @@ namespace BattleTank.Enemy
     public class AttackEnemy : EnemyState
     {
         private Rigidbody rb;
-        private BulletController bulletController;
+        private Bullet.BulletController bulletController;
         private Transform firePoint;
         private float shootForce;
         private float timeLeft = 0f;
         private float BPM;
         private float AttackRange;
         private float ChaseRange;
-
-        [SerializeField]private float offset = 1f;
 
         public override void OnStateEnter()
         {
@@ -28,10 +26,8 @@ namespace BattleTank.Enemy
             BPM = enemy.GetBPM();
             AttackRange = enemy.GetAttackRange();
             ChaseRange = enemy.GetEnemyRange();
-            Debug.Log("Attack State");
 
-            agent.SetDestination(playerTransform.position * offset);
-            Debug.Log("Player: " + playerTransform);
+            agent.SetDestination(playerTransform.position);
             agent.stoppingDistance = AttackRange;
         }
 
@@ -39,7 +35,7 @@ namespace BattleTank.Enemy
         {
             base.OnStateExit();
 
-            agent.stoppingDistance = 1f;
+            agent.stoppingDistance = 0f;
         }
 
         public override void Tick()

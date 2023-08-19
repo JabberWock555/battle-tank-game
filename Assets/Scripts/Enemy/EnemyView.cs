@@ -29,7 +29,6 @@ namespace BattleTank.Enemy
         {
             body = GetComponent<Rigidbody>();
             ChangeState(idleState);
-            // animator = GetComponent<Animator>();
         }
 
         private void Update()
@@ -56,12 +55,6 @@ namespace BattleTank.Enemy
             HealthBar.value = enemyController.TakeDamage(damage);
         }
 
-        //private void OnDrawGizmosSelected()
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawWireSphere(transform.position, enemyController.GetRange());
-        //}
-
         #region Getters
 
         internal float GetEnemyRange() { return enemyController.GetRange(); }
@@ -72,7 +65,7 @@ namespace BattleTank.Enemy
 
         internal NavMeshAgent GetAgent() { return agent; }
 
-        internal BulletController GetBulletController() { return enemyController.GetBulletController(); }
+        internal Bullet.BulletController GetBulletController() { return enemyController.GetBulletController(); }
 
         internal Transform GetFirePoint() { return firePoint; }
 

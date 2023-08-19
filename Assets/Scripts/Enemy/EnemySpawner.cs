@@ -1,29 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using BattleTank.Bullet;
 
 namespace BattleTank.Enemy
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : Singleton<EnemySpawner>
     {
-        #region Singleton
-        private static EnemySpawner instance;
-        public static EnemySpawner Instance { get { return instance; } }
-
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
-
-        #endregion
-
         [SerializeField] private EnemyScriptableOblects[] EnemyTypeList;
         [SerializeField] private Transform[] SpawnPoints;
         [SerializeField] private float SpawnDistance;
@@ -33,11 +16,14 @@ namespace BattleTank.Enemy
         private List<EnemyController> spawnedEnemyList;
         private Transform playerTranform;
         private Transform prevSpawnPoint;
+        private bool enemyListEmpty = false;
+        private int enemyDeathCount = 0 ;
+        private int enemyHitCount = 0;
 
         void Start()
         {
             spawnedEnemyList = new();
-            SpawnEnemy();
+            StartCoroutine(SpawnEnemy());
         }
 
         private void Update()
@@ -47,22 +33,27 @@ namespace BattleTank.Enemy
                 playerTranform = GetComponent<Player.TankView>().transform;
             }
 
-            if(spawnedEnemyList.Count == 0)
+            if (enemyListEmpty)
             {
-                SpawnEnemy();
+                StartCoroutine(SpawnEnemy());
             }
 
         }
 
-        private void SpawnEnemy()
+        private IEnumerator SpawnEnemy()
         {
+            enemyListEmpty = false;
+            yield return new WaitForSeconds(2f);
+
             for (int i = 0; i < enemyCount; i++)
             {
+                yield return new WaitForSeconds(2f);
                 EnemyScriptableOblects enemy = EnemyTypeList[Random.Range(0, EnemyTypeList.Length)];
                 EnemyController enemyController = new EnemyController(enemy, GetSpawnLocation(), GetBulletController(BulletType.EnemyBullet) );
                 spawnedEnemyList.Add(enemyController);
-
+                
             }
+            
         }
 
         private Transform GetSpawnLocation()
@@ -83,7 +74,11 @@ namespace BattleTank.Enemy
         internal void RemoveEnemy(EnemyController enemy)
         {
             spawnedEnemyList.Remove(enemy);
+            if(spawnedEnemyList.Count == 0) { enemyListEmpty = true; }
+            EventSystem.EventService.Instance.InvokeEnemyDeath(++enemyDeathCount);
         }
+
+        internal void SetEnemyHitCount() { enemyHitCount++; }
 
         #region Getters
 
@@ -97,6 +92,8 @@ namespace BattleTank.Enemy
         public Transform GetPlayerTransform() { return playerTranform; }
 
         public Transform[] GetSpawnPoints() { return SpawnPoints; }
+
+        public int GetEnemyHitCount() { return enemyHitCount; }
 
         #endregion
     }

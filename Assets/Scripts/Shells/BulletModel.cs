@@ -1,17 +1,21 @@
 ﻿using System;
-public class BulletModel
+
+namespace BattleTank.Bullet
 {
-    public int Damage;
-    private BulletController bulletController;
-
-    public BulletModel(BulletScriptableObject bulletObject)
+    public class BulletModel
     {
-        Damage = bulletObject.Damage;
+        public int Damage;
+        private BulletController bulletController;
 
-    }
+        public BulletModel(BulletScriptableObject bulletObject)
+        {
+            Damage = bulletObject.Damage;
 
-    public void SetBulletController(BulletController bulletController)
-    {
-        this.bulletController = bulletController;
+        }
+
+        public void SetBulletController(BulletController bulletController)
+        {
+            this.bulletController = bulletController;
+        }
     }
 }
