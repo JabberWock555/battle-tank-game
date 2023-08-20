@@ -23,19 +23,18 @@ namespace BattleTank.Bullet
             {
                 damagable.TakeDamage(bulletController.GetDamage());
             }
-
-            Destroy(gameObject);
+            body.velocity = Vector3.zero;
+            bulletController.DisableBullet(this);
         }
 
+        internal BulletType GetBulletType()
+        {
+            return bulletType;
+        }
 
         public Rigidbody GetRigidbody()
         {
             return body;
-        }
-
-        private void OnDestroy()
-        {
-            BulletService.Instance.BulletDestroyVfx(transform);
         }
 
     }

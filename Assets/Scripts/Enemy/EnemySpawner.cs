@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using BattleTank.Bullet;
+using BattleTank.EventSystem;
+using BattleTank.Generics;
 
 namespace BattleTank.Enemy
 {
@@ -75,10 +77,13 @@ namespace BattleTank.Enemy
         {
             spawnedEnemyList.Remove(enemy);
             if(spawnedEnemyList.Count == 0) { enemyListEmpty = true; }
-            EventSystem.EventService.Instance.InvokeEnemyDeath(++enemyDeathCount);
+            EventService.Instance.InvokeEnemyDeath(++enemyDeathCount);
         }
 
-        internal void SetEnemyHitCount() { enemyHitCount++; }
+        internal void InvokeEnemyHit()
+        {
+            EventService.Instance.InvokeOnEnemyHit(++enemyHitCount);
+        }
 
         #region Getters
 

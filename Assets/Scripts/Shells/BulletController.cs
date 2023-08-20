@@ -5,6 +5,7 @@ namespace BattleTank.Bullet
 {
     public class BulletController
     {
+        private BulletService bulletService;
         private BulletView bulletView;
         private BulletModel bulletModel;
         private Rigidbody BulletBody;
@@ -15,11 +16,13 @@ namespace BattleTank.Bullet
             bulletModel.SetBulletController(this);
             bulletView = bulletObject.bulletView;
             bulletView.SetBulletController(this);
+            bulletService = BulletService.Instance.GetBulletService();
         }
 
         private BulletView spwanBullet()
         {
-            BulletView Newbullet = GameObject.Instantiate<BulletView>(bulletView);
+            BulletView Newbullet = bulletService.BulletPool.GetBullet(bulletView);
+            Newbullet.gameObject.SetActive(true);
             Newbullet.SetBulletController(this);
             return Newbullet;
         }
@@ -27,6 +30,14 @@ namespace BattleTank.Bullet
         public int GetDamage()
         {
             return bulletModel.Damage;
+        }
+
+        internal void DisableBullet(BulletView bullet)
+        {
+            bulletService.BulletDestroyVfx(bullet.transform);
+            bullet.gameObject.SetActive(false);
+            bullet.transform.SetPositionAndRotation(Vector3.zero, Quaternion.Euler(Vector3.zero));
+            bulletService.BulletPool.ReturnItem(bullet);
         }
 
         public void Shoot(Transform firePoint, float shootForce)

@@ -13,7 +13,7 @@ namespace BattleTank.Player
         private BulletController bulletController;
         private int BulletCount = 0;
 
-        public TankController(PlayerTankScriptableObjects playerTank, BulletController bulletController)
+        internal TankController(PlayerTankScriptableObjects playerTank, BulletController bulletController)
         {
             tankView = GameObject.Instantiate<TankView>(playerTank.tankView);
             tankModel = new TankModel(playerTank);
@@ -22,31 +22,29 @@ namespace BattleTank.Player
             tankView.SetTankController(this);
             tankModel.SetTankController(this);
             this.bulletController = bulletController;
-
             Enemy.EnemySpawner.Instance.SetPlayerTransform(tankView);
         }
 
-        public void CameraSetup(Camera _cam)
+        internal void CameraSetup(Camera _cam)
         {
             cam = _cam;
             cam.transform.rotation = Quaternion.Euler(tankModel.camOffsetRotation);
             camTarget = tankView.transform;
         }
 
-        public void CameraMovement()
+        internal void CameraMovement()
         {
             Vector3 camPos = camTarget.position + tankModel.camOffsetPosition;
             cam.transform.position = Vector3.Lerp(cam.transform.position, camPos, tankModel.camSpeed);
             cam.transform.LookAt(camTarget.position);
         }
 
-
-        public void Move(float input)
+        internal void Move(float input)
         {
             body.velocity = input * tankModel.movementSpeed * tankView.transform.forward;
         }
 
-        public void Rotate(float horizontalInput, float verticalInput)
+        internal void Rotate(float horizontalInput, float verticalInput)
         {
             if (verticalInput < 0)
             {
@@ -57,13 +55,13 @@ namespace BattleTank.Player
             body.MoveRotation(body.rotation * deltaRotation);
         }
 
-        public void Shoot(Transform firePoint)
+        internal void Shoot(Transform firePoint)
         {
             bulletController.Shoot(firePoint, tankModel.shootForce);
-            EventSystem.EventService.Instance.InvokePlayerShoot(++BulletCount);
+            TankSpawner.Instance.InvokePlayerShootEvent(++BulletCount);
         }
 
-        public int TakeDamage(int Damage)
+        internal int TakeDamage(int Damage)
         {
             if (tankModel.Health <= 0)
             {

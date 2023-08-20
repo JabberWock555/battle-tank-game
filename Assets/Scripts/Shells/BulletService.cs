@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using BattleTank.Generics;
+using BattleTank.ObjectPool;
 using System;
 
 namespace BattleTank.Bullet
@@ -9,13 +10,22 @@ namespace BattleTank.Bullet
         [SerializeField] private BulletScriptableObject[] bulletTypes;
         [SerializeField] private ParticleSystem bulletVFX;
 
+        internal BulletPoolService BulletPool;
+
+        private void Start()
+        {
+            BulletPool = new(this.transform) ;
+        }
+
         public BulletController CreateBulletController(BulletType BulletType)
         {
             BulletScriptableObject bulletObject = bulletTypes[(int)BulletType];
-            BulletController bulletController = new BulletController(bulletObject);
+            BulletController bulletController = new(bulletObject);
             return bulletController;
         }
 
+        internal BulletService GetBulletService() { return this; }
+        
         public void BulletDestroyVfx(Transform BulletPos)
         {
             ParticleSystem explosion = Instantiate(bulletVFX, BulletPos.transform.position, Quaternion.identity);
@@ -23,6 +33,10 @@ namespace BattleTank.Bullet
             Destroy(explosion.gameObject, 0.75f);
         }
 
+        public void ReturnBullet(BulletView bullet)
+        {
+            BulletPool.ReturnItem(bullet);
+        }
 
     }
 }

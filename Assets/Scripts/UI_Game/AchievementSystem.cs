@@ -51,7 +51,6 @@ namespace BattleTank.AchievementSystem
         {
            
             float Accuracy = ((float)EnemyHitCount / PlayerBulletCount) * 100 ;
-            Debug.Log("Accuracy: " + Accuracy );
 
             for(int i =0; i < AccuracyCheckpoints.Length - 1; i++)
             {

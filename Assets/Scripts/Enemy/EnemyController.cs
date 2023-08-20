@@ -25,9 +25,7 @@ namespace BattleTank.Enemy
 
         public float TakeDamage(int Damage)
         {
-            int hitCount = EnemySpawner.Instance.GetEnemyHitCount();
-            EventSystem.EventService.Instance.InvokeOnEnemyHit(++hitCount);
-            EnemySpawner.Instance.SetEnemyHitCount();
+            EnemySpawner.Instance.InvokeEnemyHit();
 
             if (enemyModel.GetHealth() <= 0)
             {

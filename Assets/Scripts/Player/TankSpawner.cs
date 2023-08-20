@@ -1,4 +1,5 @@
 using BattleTank.Bullet;
+using BattleTank.Generics;
 using UnityEngine;
 
 namespace BattleTank.Player
@@ -23,7 +24,6 @@ namespace BattleTank.Player
             spawnedTank = tankController;
         }
 
-
         internal ParticleSystem getExplosion() { return Explosion; }
 
         private BulletController GetBulletController(BulletType BulletType)
@@ -31,6 +31,11 @@ namespace BattleTank.Player
             return BulletService.Instance.CreateBulletController(BulletType);
         }
 
-        public TankController GetSpawnedTank() { return spawnedTank; }
+        internal TankController GetSpawnedTank() { return spawnedTank; }
+
+        internal void InvokePlayerShootEvent(int bulletCount)
+        {
+            EventSystem.EventService.Instance.InvokePlayerShoot(bulletCount);
+        }
     }
 }

@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+namespace BattleTank.Generics
 {
-    private static T instance;
-    public static T Instance { get { return instance; } }
-
-    private void Awake()
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        if (instance == null)
+        private static T instance;
+        public static T Instance { get { return instance; } }
+
+        private void Awake()
         {
-            instance = (T)this;
-        }
-        else
-        {
-            Destroy(this);
+            if (instance == null)
+            {
+                instance = (T)this;
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
     }
 }
