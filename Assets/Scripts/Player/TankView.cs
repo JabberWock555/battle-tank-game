@@ -78,10 +78,10 @@ namespace BattleTank.Player
 
         internal void DestroyEffect()
         {
-            ParticleSystem explosion = Instantiate<ParticleSystem>(TankSpawner.Instance.getExplosion(), transform.position, Quaternion.identity);
+            ParticleSystem explosion = TankSpawner.Instance.getExplosion();
+            explosion.transform.position = transform.position;
             explosion.Play();
             Destroy(gameObject);
-            Destroy(explosion.gameObject, 0.75f);
         }
 
         public void TakeDamage(int damage)

@@ -1,32 +1,34 @@
 ﻿using System;
 using UnityEngine;
 using BattleTank.Generics;
+using BattleTank.Bullet;
 
 namespace BattleTank.ObjectPool
 {
     public class ExplosionPoolService : ObjectPoolGeneric<ParticleSystem>
     {
-        private BulletView bulletPrefab;
+        private ParticleSystem explosionPrefab;
         private Transform PoolParent;
 
-        public BulletPoolService(Transform parent) { PoolParent = parent; }
+        public ExplosionPoolService(Transform parent) { PoolParent = parent; }
 
-        internal BulletView GetBullet(BulletView bulletPrefab)
+        internal ParticleSystem GetExplosion(ParticleSystem explosionPrefab, ExplosionTypes explosionType)
         {
-            this.bulletPrefab = bulletPrefab;
-            return GetItem((int)bulletPrefab.GetBulletType());
+            this.explosionPrefab = explosionPrefab;
+            return GetItem((int) explosionType);
 
         }
 
-        protected override int SetId()
+        protected override ParticleSystem CreateItem()
         {
-            return (int)bulletPrefab.GetBulletType();
-        }
-
-        protected override BulletView CreateItem()
-        {
-            BulletView Newbullet = GameObject.Instantiate(bulletPrefab, PoolParent);
-            return Newbullet;
+            ParticleSystem explosion = GameObject.Instantiate(explosionPrefab, PoolParent);
+            return explosion;
         }
     }
+}
+
+public enum ExplosionTypes
+{
+    BulletExplosion,
+    TankExplosion
 }

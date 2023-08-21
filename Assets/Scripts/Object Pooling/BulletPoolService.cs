@@ -17,11 +17,6 @@ namespace BattleTank.ObjectPool
             
         }
 
-        protected override int SetId()
-        {
-            return (int)bulletPrefab.GetBulletType();
-        }
-
         protected override BulletView CreateItem()
         {
             BulletView Newbullet = GameObject.Instantiate(bulletPrefab, PoolParent);

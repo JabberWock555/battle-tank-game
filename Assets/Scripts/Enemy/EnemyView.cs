@@ -43,11 +43,12 @@ namespace BattleTank.Enemy
 
         public void DestroyEffect()
         {
-            ParticleSystem explosion = Instantiate<ParticleSystem>(EnemySpawner.Instance.getExplosion(), transform.position, Quaternion.identity);
+            ParticleSystem explosion = EnemySpawner.Instance.getExplosion();
+            explosion.transform.position = transform.position;
             explosion.Play();
 
-            Destroy(gameObject);
-            Destroy(explosion.gameObject, 0.75f);
+            gameObject.SetActive(false);
+            //Destroy(explosion.gameObject, 0.75f);
         }
 
         public void TakeDamage(int damage)

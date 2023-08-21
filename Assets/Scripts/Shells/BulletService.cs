@@ -2,6 +2,7 @@
 using BattleTank.Generics;
 using BattleTank.ObjectPool;
 using System;
+using System.Collections;
 
 namespace BattleTank.Bullet
 {
@@ -11,10 +12,12 @@ namespace BattleTank.Bullet
         [SerializeField] private ParticleSystem bulletVFX;
 
         internal BulletPoolService BulletPool;
+        internal ExplosionPoolService bulletExplosionPool;
 
         private void Start()
         {
-            BulletPool = new(this.transform) ;
+            BulletPool = new(transform) ;
+            bulletExplosionPool = new(transform);
         }
 
         public BulletController CreateBulletController(BulletType BulletType)
@@ -28,9 +31,19 @@ namespace BattleTank.Bullet
         
         public void BulletDestroyVfx(Transform BulletPos)
         {
-            ParticleSystem explosion = Instantiate(bulletVFX, BulletPos.transform.position, Quaternion.identity);
+            ParticleSystem explosion = bulletExplosionPool.GetExplosion(bulletVFX, ExplosionTypes.BulletExplosion);
+            explosion.gameObject.SetActive(true);
+            explosion.transform.SetPositionAndRotation(BulletPos.transform.position, Quaternion.identity);
             explosion.Play();
-            Destroy(explosion.gameObject, 0.75f);
+            StartCoroutine(DisableVFX(explosion));
+        }
+
+        private IEnumerator DisableVFX(ParticleSystem explosion)
+        {
+            yield return new WaitForSeconds(0.75f);
+            explosion.gameObject.SetActive(false);
+            explosion.transform.SetPositionAndRotation(Vector3.zero, Quaternion.Euler(Vector3.zero));
+            bulletExplosionPool.ReturnItem(explosion);
         }
 
         public void ReturnBullet(BulletView bullet)

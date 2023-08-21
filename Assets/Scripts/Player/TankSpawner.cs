@@ -1,5 +1,7 @@
+using System.Collections;
 using BattleTank.Bullet;
 using BattleTank.Generics;
+using BattleTank.ObjectPool;
 using UnityEngine;
 
 namespace BattleTank.Player
@@ -8,12 +10,14 @@ namespace BattleTank.Player
     public class TankSpawner : Singleton<TankSpawner>
     {
         public PlayerTankScriptableObjects[] PlayerConfig;
-        [SerializeField] private ParticleSystem Explosion;
+        [SerializeField] private ParticleSystem ExplosionPrefab;
         private TankController spawnedTank;
+        private ExplosionPoolService tankExplosionPool;
 
         void Start()
         {
             CreatePlayerTank();
+            tankExplosionPool = new(transform);
 
         }
 
@@ -24,7 +28,22 @@ namespace BattleTank.Player
             spawnedTank = tankController;
         }
 
-        internal ParticleSystem getExplosion() { return Explosion; }
+        internal ParticleSystem getExplosion()
+        {
+            ParticleSystem explosion = tankExplosionPool.GetExplosion(ExplosionPrefab, ExplosionTypes.TankExplosion);
+            explosion.gameObject.SetActive(true);
+            StartCoroutine(DisableExplosion(explosion));
+            return explosion;
+        }
+
+        private IEnumerator DisableExplosion(ParticleSystem explosion)
+        {
+            yield return new WaitForSeconds(0.75f);
+            explosion.gameObject.SetActive(false);
+            explosion.transform.SetPositionAndRotation(Vector3.zero, Quaternion.Euler(Vector3.zero));
+            tankExplosionPool.ReturnItem(explosion);
+
+        }
 
         private BulletController GetBulletController(BulletType BulletType)
         {

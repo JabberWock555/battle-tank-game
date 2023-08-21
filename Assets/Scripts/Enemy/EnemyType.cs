@@ -1,7 +1,7 @@
 ﻿using System;
 public enum EnemyType
 {
-    None,
-    Red,
-    Orange
+    None = -1,
+    Red = 0,
+    Orange = 1
 }

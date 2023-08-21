@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using BattleTank.Bullet;
 using UnityEngine;
@@ -8,19 +7,33 @@ namespace BattleTank.Enemy
 {
     public class EnemyController
     {
+        public EnemyType enemyType;
         private EnemyView enemyView;
         private EnemyModel enemyModel;
         private Transform PlayerTransform;
         private BulletController bulletController;
+        private EnemySpawner enemyService;
 
-        public EnemyController(EnemyScriptableOblects enemy, Transform spawnPoint, BulletController bulletController)
+        public EnemyController(EnemyType enemyType)
         {
-            Vector3 position = spawnPoint.position;
-            enemyView = GameObject.Instantiate<EnemyView>(enemy.enemyView, position, Quaternion.identity);
+            enemyService = EnemySpawner.Instance.GetEnemySpawner();
+            EnemyScriptableObjects enemyObject = enemyService.GetEnemyScriptableObject((int)enemyType);
+            Vector3 position = enemyService.GetSpawnLocation().position;
+            bulletController = enemyService.GetBulletController();
 
-            enemyModel = new EnemyModel(enemy);
+            if (enemyView == null || enemyModel == null)
+            {
+                enemyModel = new EnemyModel(enemyObject);
+                enemyView = GameObject.Instantiate<EnemyView>(enemyObject.enemyView, position, Quaternion.identity);
+            }
+            enemyView.gameObject.SetActive(true);
             enemyView.SetEnemyController(this);
-            this.bulletController = bulletController;
+            
+        }
+
+        internal void AcivateEnemy() {
+            enemyView.gameObject.SetActive(true);
+            enemyModel.RestartEnemy();
         }
 
         public float TakeDamage(int Damage)
@@ -30,6 +43,7 @@ namespace BattleTank.Enemy
             if (enemyModel.GetHealth() <= 0)
             {
                 enemyView.DestroyEffect();
+
                 EnemySpawner.Instance.RemoveEnemy(this);
             }
             else

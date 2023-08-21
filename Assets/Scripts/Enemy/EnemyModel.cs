@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace BattleTank.Enemy
 {
     public class EnemyModel
     {
-
+        private float MaxHealth;
         private float enemyHealth;
         public float enemyRange { get; private set; }
         public float enemySpeed { get; private set; }
@@ -13,9 +14,10 @@ namespace BattleTank.Enemy
         public float enemyAttackRange { get; private set; }
         public float enemyBPM { get; private set; }
 
-        public EnemyModel(EnemyScriptableOblects enemy)
+        public EnemyModel(EnemyScriptableObjects enemy)
         {
             enemySpeed = enemy.enemySpeed;
+            MaxHealth = enemy.enemyHealth;
             enemyHealth = enemy.enemyHealth;
             enemyShootForce = enemy.enemyShootForce;
             enemyRange = enemy.enemyRange ;
@@ -31,6 +33,11 @@ namespace BattleTank.Enemy
         public float GetHealth()
         {
             return enemyHealth;
+        }
+
+        internal void RestartEnemy()
+        {
+            enemyHealth = MaxHealth;
         }
     }
 }

@@ -34,15 +34,10 @@ namespace BattleTank.ObjectPool
             }
             PooledItem<T> newPooledItem = new();
             newPooledItem.item = CreateItem();
-            newPooledItem.id = SetId();
+            newPooledItem.id = id;
             newPooledItem.isUsed = true;
             pooledItems.Add(newPooledItem);
             return newPooledItem.item;
-        }
-
-        protected virtual int SetId()
-        {
-            return -1;
         }
 
         internal virtual void ReturnItem(T item)

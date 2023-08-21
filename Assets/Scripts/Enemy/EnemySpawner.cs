@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using BattleTank.ObjectPool;
 using System.Collections.Generic;
 using BattleTank.Bullet;
 using BattleTank.EventSystem;
@@ -9,12 +10,14 @@ namespace BattleTank.Enemy
 {
     public class EnemySpawner : Singleton<EnemySpawner>
     {
-        [SerializeField] private EnemyScriptableOblects[] EnemyTypeList;
+        [SerializeField] private EnemyScriptableObjects[] EnemyTypeList;
         [SerializeField] private Transform[] SpawnPoints;
         [SerializeField] private float SpawnDistance;
         [SerializeField] private int enemyCount = 3;
-        [SerializeField] private ParticleSystem Explosion;
+        [SerializeField] private ParticleSystem ExplosionPrefab;
 
+        private ExplosionPoolService enemyExplosionPool;
+        private EnemyPoolService enemyPoolService;
         private List<EnemyController> spawnedEnemyList;
         private Transform playerTranform;
         private Transform prevSpawnPoint;
@@ -24,6 +27,8 @@ namespace BattleTank.Enemy
 
         void Start()
         {
+            enemyPoolService = new();
+            enemyExplosionPool = new(transform);
             spawnedEnemyList = new();
             StartCoroutine(SpawnEnemy());
         }
@@ -50,22 +55,11 @@ namespace BattleTank.Enemy
             for (int i = 0; i < enemyCount; i++)
             {
                 yield return new WaitForSeconds(2f);
-                EnemyScriptableOblects enemy = EnemyTypeList[Random.Range(0, EnemyTypeList.Length)];
-                EnemyController enemyController = new EnemyController(enemy, GetSpawnLocation(), GetBulletController(BulletType.EnemyBullet) );
+                EnemyController enemyController = enemyPoolService.GetEnemyController(GetRandomEnemy());
                 spawnedEnemyList.Add(enemyController);
-                
+                enemyController.AcivateEnemy();
             }
             
-        }
-
-        private Transform GetSpawnLocation()
-        {
-            Transform location = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-
-            if(location == prevSpawnPoint) { return GetSpawnLocation(); }
-
-            prevSpawnPoint = location;
-            return location;
         }
 
         public void SetPlayerTransform(Player.TankView player)
@@ -75,6 +69,7 @@ namespace BattleTank.Enemy
 
         internal void RemoveEnemy(EnemyController enemy)
         {
+            enemyPoolService.ReturnItem(enemy);
             spawnedEnemyList.Remove(enemy);
             if(spawnedEnemyList.Count == 0) { enemyListEmpty = true; }
             EventService.Instance.InvokeEnemyDeath(++enemyDeathCount);
@@ -85,14 +80,55 @@ namespace BattleTank.Enemy
             EventService.Instance.InvokeOnEnemyHit(++enemyHitCount);
         }
 
-        #region Getters
 
-        private BulletController GetBulletController(BulletType BulletType)
+        private IEnumerator DisableExplosion(ParticleSystem explosion)
         {
-            return BulletService.Instance.CreateBulletController(BulletType);
+
+            yield return new WaitForSeconds(0.75f);
+            explosion.gameObject.SetActive(false);
+            explosion.transform.SetPositionAndRotation(Vector3.zero, Quaternion.Euler(Vector3.zero));
+            enemyExplosionPool.ReturnItem(explosion);
+
         }
 
-        public ParticleSystem getExplosion() { return Explosion; }
+        #region Getters
+
+        private int GetRandomEnemy()
+        {
+            int seed = (int)System.DateTime.Now.Ticks; // Use current time as seed
+            Random.InitState(seed);
+
+            int index = Random.Range(0, EnemyTypeList.Length);
+            return index;
+        }
+
+
+        internal Transform GetSpawnLocation()
+        {
+            Transform location = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+
+            if (location == prevSpawnPoint) { return GetSpawnLocation(); }
+
+            prevSpawnPoint = location;
+            return location;
+        }
+
+        internal EnemyScriptableObjects GetEnemyScriptableObject(int index ){ return EnemyTypeList[index]; }
+
+        internal EnemySpawner GetEnemySpawner() { return this; }
+
+        internal BulletController GetBulletController()
+        {
+            return BulletService.Instance.CreateBulletController(BulletType.EnemyBullet);
+        }
+
+        public ParticleSystem getExplosion()
+        {
+            ParticleSystem explosion = enemyExplosionPool.GetExplosion(ExplosionPrefab, ExplosionTypes.TankExplosion);
+            explosion.gameObject.SetActive(true);
+            StartCoroutine(DisableExplosion(explosion));
+            return explosion;
+        }
 
         public Transform GetPlayerTransform() { return playerTranform; }
 
