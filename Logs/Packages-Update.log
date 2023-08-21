@@ -50,3 +50,11 @@ The following packages were added:
   com.unity.timeline@1.6.4
   com.unity.ugui@1.0.0
   com.unity.xr.legacyinputhelpers@2.1.9
+
+=== Mon Aug  7 22:20:59 2023
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.postprocessing@3.2.2
