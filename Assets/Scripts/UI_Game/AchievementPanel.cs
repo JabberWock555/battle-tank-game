@@ -12,6 +12,8 @@ namespace BattleTank.AchievementSystem
 
         private void Start()
         {
+            GameObject test = new GameObject();
+            test.AddComponent<Text>();
             anim = GetComponent<Animator>();
         }
 

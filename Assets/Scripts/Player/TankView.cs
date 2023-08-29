@@ -66,19 +66,13 @@ namespace BattleTank.Player
             this.tankType = tankType;
         }
 
-        public Rigidbody GetRigidBody()
-        {
-            return body;
-        }
+        public Rigidbody GetRigidBody() { return body; }
 
-        public Camera GetCamera()
-        {
-            return cam;
-        }
+        public Camera GetCamera() { return cam; }
 
         internal void DestroyEffect()
         {
-            ParticleSystem explosion = TankSpawner.Instance.getExplosion();
+            ParticleSystem explosion = TankService.Instance.getExplosion();
             explosion.transform.position = transform.position;
             explosion.Play();
             Destroy(gameObject);

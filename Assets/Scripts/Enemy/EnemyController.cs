@@ -12,11 +12,11 @@ namespace BattleTank.Enemy
         private EnemyModel enemyModel;
         private Transform PlayerTransform;
         private BulletController bulletController;
-        private EnemySpawner enemyService;
+        private EnemyService enemyService;
 
         public EnemyController(EnemyType enemyType)
         {
-            enemyService = EnemySpawner.Instance.GetEnemySpawner();
+            enemyService = EnemyService.Instance.GetEnemySpawner();
             EnemyScriptableObjects enemyObject = enemyService.GetEnemyScriptableObject((int)enemyType);
             Vector3 position = enemyService.GetSpawnLocation().position;
             bulletController = enemyService.GetBulletController();
@@ -38,13 +38,13 @@ namespace BattleTank.Enemy
 
         public float TakeDamage(int Damage)
         {
-            EnemySpawner.Instance.InvokeEnemyHit();
+            EnemyService.Instance.InvokeEnemyHit();
 
             if (enemyModel.GetHealth() <= 0)
             {
                 enemyView.DestroyEffect();
 
-                EnemySpawner.Instance.RemoveEnemy(this);
+                EnemyService.Instance.RemoveEnemy(this);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace BattleTank.Enemy
         internal Transform[] GetPatrolPoints()
         {
             Transform[] PatrolPoints;
-            Transform[] spawnPoints = EnemySpawner.Instance.GetSpawnPoints();
+            Transform[] spawnPoints = EnemyService.Instance.GetSpawnPoints();
             PatrolPoints = Shuffle(spawnPoints);
 
             return PatrolPoints;

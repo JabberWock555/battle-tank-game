@@ -5,8 +5,8 @@ namespace BattleTank.Player
 {
     public class TankController
     {
+        public TankView tankView { get;  private set; }
         private TankModel tankModel;
-        private TankView tankView;
         private Camera cam;
         private Rigidbody body;
         private Transform camTarget;
@@ -22,7 +22,7 @@ namespace BattleTank.Player
             tankView.SetTankController(this);
             tankModel.SetTankController(this);
             this.bulletController = bulletController;
-            Enemy.EnemySpawner.Instance.SetPlayerTransform(tankView);
+            Enemy.EnemyService.Instance.SetPlayerTransform(tankView);
         }
 
         internal void CameraSetup(Camera _cam)
@@ -58,7 +58,7 @@ namespace BattleTank.Player
         internal void Shoot(Transform firePoint)
         {
             bulletController.Shoot(firePoint, tankModel.shootForce);
-            TankSpawner.Instance.InvokePlayerShootEvent(++BulletCount);
+            TankService.Instance.InvokePlayerShootEvent(++BulletCount);
         }
 
         internal int TakeDamage(int Damage)

@@ -20,7 +20,7 @@ namespace BattleTank.Enemy
         public virtual void OnStateEnter()
         {
             this.enabled = true;
-            this.playerTransform = EnemySpawner.Instance.GetPlayerTransform();
+            this.playerTransform = EnemyService.Instance.GetPlayerTransform();
         }
 
         public virtual void OnStateExit()

@@ -43,7 +43,7 @@ namespace BattleTank.Enemy
 
         public void DestroyEffect()
         {
-            ParticleSystem explosion = EnemySpawner.Instance.getExplosion();
+            ParticleSystem explosion = EnemyService.Instance.getExplosion();
             explosion.transform.position = transform.position;
             explosion.Play();
 
@@ -54,6 +54,18 @@ namespace BattleTank.Enemy
         public void TakeDamage(int damage)
         {
             HealthBar.value = enemyController.TakeDamage(damage);
+        }
+
+
+        internal void ChangeState(EnemyState newState)
+        {
+            if (currentState != null)
+            {
+                currentState.OnStateExit();
+            }
+
+            currentState = newState;
+            currentState.OnStateEnter();
         }
 
         #region Getters
@@ -78,16 +90,6 @@ namespace BattleTank.Enemy
 
         #endregion
 
-        internal void ChangeState(EnemyState newState)
-        {
-            if(currentState != null)
-            {
-                currentState.OnStateExit();
-            }
-
-            currentState = newState;
-            currentState.OnStateEnter();
-        }
 
     }
 }

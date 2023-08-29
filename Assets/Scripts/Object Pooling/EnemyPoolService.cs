@@ -12,7 +12,6 @@ namespace BattleTank.ObjectPool
         internal EnemyController GetEnemyController(int enemyType)
         {
             this.enemyType = (EnemyType)enemyType;
-            Debug.Log(this.enemyType);
             return GetItem(enemyType);
         }
 
