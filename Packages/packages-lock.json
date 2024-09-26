@@ -1,5 +1,6 @@
 {
   "dependencies": {
+
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -78,6 +79,7 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+ 
     "com.unity.purchasing": {
       "version": "4.1.4",
       "depth": 0,
@@ -144,6 +146,7 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.9",
       "depth": 0,
