@@ -1,0 +1,4 @@
+{
+    "dotnet.defaultSolution": "battle-tank-game.sln",
+    "editor.acceptSuggestionOnEnter": "on"
+}

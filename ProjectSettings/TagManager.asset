@@ -11,18 +11,18 @@ TagManager:
   - 
   - Water
   - UI
+  - Boundry
+  - Level
+  - Ground
+  - Player
+  - PlayerBullet
+  - Enemy
+  - EnemyBullet
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - interactableLayer
   - 
   - 
   - 
